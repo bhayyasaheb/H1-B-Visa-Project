@@ -73,6 +73,17 @@ Computer and Information Research Scientists,181
 COMPUTER OCCUPATIONS, ALL OTHER,160
 
 
+hadoop jar h1bvisa.jar com.niit.h1bvisa.Q3_UsingChainMR_DataScientist /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q3_UsingChainMR_DataScientist
+
+hadoop fs -cat /H1BVisaProject/Q3_UsingChainMR_DataScientist/p*
+
+STATISTICIANS	572
+COMPUTER AND INFORMATION RESEARCH SCIENTISTS	419
+OPERATIONS RESEARCH ANALYSTS	380
+Computer and Information Research Scientists	181
+COMPUTER OCCUPATIONS, ALL OTHER	160
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
