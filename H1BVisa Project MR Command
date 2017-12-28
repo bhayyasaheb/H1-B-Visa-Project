@@ -13,7 +13,49 @@ Ans:-
 hadoop jar h1bvisa.jar com.niit.h1bvisa.Q1A_DataEngineerJob /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q1A_DataEngineerJob
 
 hadoop fs -cat /H1BVisaProject/Q1A_DataEngineerJob/p*
+
 Data Engineer Average Growth For Five Years	68.809146570357
 
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2 a) Which part of the US has the most Data Engineer jobs for each year?
+Ans:-
+
+hadoop jar h1bvisa.jar com.niit.h1bvisa.Q2A_WorksiteInUSForDataEngineerJob /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q2A_WorksiteInUSForDataEngineerJob
+
+hadoop fs -cat /H1BVisaProject/Q2A_WorksiteInUSForDataEngineerJob/p*
+
+2011,SEATTLE, WASHINGTON,19
+2011,NEW YORK, NEW YORK,4
+2011,SAN FRANCISCO, CALIFORNIA,3
+2011,WALTHAM, MASSACHUSETTS,2
+2011,TALLAHASSEE, FLORIDA,1
+2012,SEATTLE, WASHINGTON,26
+2012,SAN FRANCISCO, CALIFORNIA,6
+2012,PONTIAC, MICHIGAN,3
+2012,SAN MATEO, CALIFORNIA,2
+2012,WOODLAND HILLS, CALIFORNIA,1
+2013,SEATTLE, WASHINGTON,43
+2013,SAN FRANCISCO, CALIFORNIA,16
+2013,MENLO PARK, CALIFORNIA,11
+2013,NEW YORK, NEW YORK,5
+2013,MOUNTAIN VIEW, CALIFORNIA,3
+2014,SEATTLE, WASHINGTON,42
+2014,SAN FRANCISCO, CALIFORNIA,28
+2014,MENLO PARK, CALIFORNIA,18
+2014,NEW YORK, NEW YORK,16
+2014,MOUNTAIN VIEW, CALIFORNIA,13
+2015,SEATTLE, WASHINGTON,60
+2015,SAN FRANCISCO, CALIFORNIA,52
+2015,NEW YORK, NEW YORK,35
+2015,MENLO PARK, CALIFORNIA,21
+2015,MOUNTAIN VIEW, CALIFORNIA,17
+2016,SEATTLE, WASHINGTON,121
+2016,SAN FRANCISCO, CALIFORNIA,78
+2016,NEW YORK, NEW YORK,64
+2016,MENLO PARK, CALIFORNIA,38
+2016,IRVINE, CALIFORNIA,17
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
