@@ -1,0 +1,19 @@
+
+
+Input data Location or path:- /user/hive/warehouse/h1b.db/h1b_final
+
+hadoop fs -mkdir /H1BVisaProject
+
+
+
+
+1 a) Is the number of petitions with Data Engineer job title increasing over time?
+Ans:- 
+
+hadoop jar h1bvisa.jar com.niit.h1bvisa.Q1A_DataEngineerJob /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q1A_DataEngineerJob
+
+hadoop fs -cat /H1BVisaProject/Q1A_DataEngineerJob/p*
+Data Engineer Average Growth For Five Years	68.809146570357
+
+
+
