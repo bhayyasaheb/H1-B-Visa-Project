@@ -85,7 +85,11 @@ COMPUTER OCCUPATIONS, ALL OTHER	160
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
+4)Which top 5 employers file the most petitions each year? - Case Status - ALL
+Ans:-
 
+hadoop jar h1bvisa.jar com.niit.h1bvisa.Q4_Top5EmployersWithMostPetitions /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q4_Top5EmployersWithMostPetitions
 
+hadoop fs -cat /H1BVisaProject/Q4_Top5EmployersWithMostPetitions/p*
 
 
