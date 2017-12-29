@@ -283,3 +283,19 @@ hadoop fs -cat /H1BVisaProject/Q6_CaseStatusPercentOnTotalApplicationYearWise/p*
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 
+7) Create a bar graph to depict the number of applications for each year [All]
+Ans:-
+
+hadoop jar h1bvisa.jar com.niit.h1bvisa.Q7_NumberOfApplicationForEachYear /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q7_NumberOfApplicationForEachYear
+
+hadoop fs -cat /H1BVisaProject/Q7_NumberOfApplicationForEachYear/p*
+2011	358767
+2012	415607
+2013	442114
+2014	519427
+2015	618727
+2016	647803
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
