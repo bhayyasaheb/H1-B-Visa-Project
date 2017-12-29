@@ -266,3 +266,20 @@ hadoop fs -cat /H1BVisaProject/Q5B_MostPopularCertifiedTop10JobPositions/p*
 2016,TECHNOLOGY LEAD - US,5405
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+6) Find the percentage and the count of each case status on total applications for each year. Create a line graph depicting the pattern of All the cases over the period of time.
+
+Ans:-
+hadoop jar h1bvisa.jar com.niit.h1bvisa.Q6_CaseStatusPercentOnTotalApplicationYearWise /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q6_CaseStatusPercentOnTotalApplicationYearWise
+
+hadoop fs -cat /H1BVisaProject/Q6_CaseStatusPercentOnTotalApplicationYearWise/p*
+
+2011,85.831752,3.232181,2.816591,8.119476
+2012,84.856126,7.487362,2.580563,5.075949
+2013,86.618157,8.014223,2.621496,2.746124
+2014,87.624247,6.998096,3.086863,2.290794
+2015,88.452258,6.637984,3.144359,1.765399
+2016,87.935067,7.269494,3.379114,1.416326
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
