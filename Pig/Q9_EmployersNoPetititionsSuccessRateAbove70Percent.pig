@@ -70,10 +70,10 @@ joined = JOIN allcount BY $0, successcount1 BY $0, successcount2 BY $0;
 
 
 
-finalbag = FOREACH joined GENERATE $0,$1 as petitions, (FLOAT)((($3+$5)*100)/$1) AS successrate;
+finalbag = FOREACH joined GENERATE $0 AS employer_name, $1 as petitions, (FLOAT)((($3+$5)*100)/$1) AS successrate;
 
 --DESCRIBE finalbag;
---finalbag: {allcount::employer_name: chararray,petitions: long,successrate: float}
+--finalbag: {employer_name: chararray,petitions: long,successrate: float}
 
 								
 filtersuccessrate = FILTER finalbag BY petitions >= 1000 AND successrate > 70;
@@ -86,7 +86,7 @@ finaloutput = ORDER filtersuccessrate BY successrate DESC;
 --finaloutput = ORDER filtersuccessrate BY $2 DESC;
 
 
-STORE finaloutput INTO '/H1BVisaProject/Pig/Q9_ EmployersWithNoPetititionsHavingSuccessRateAbove70Percent' USING PigStorage();
+STORE finaloutput INTO '/H1BVisaProject/Pig/Q9_EmployersWithNoPetititionsHavingSuccessRateAbove70Percent' USING PigStorage();
 
 
 DUMP finaloutput;
