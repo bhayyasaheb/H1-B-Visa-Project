@@ -12,3 +12,10 @@ Ans:-
 pig Q6_PercentageAndCountOfEachCaseStatusOnTotalApplicationYearWise.pig
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------
+
+9) Which are the employers along with the number of petitions who have the success rate more than 70%  in petitions. (total petitions filed 1000 OR more than 1000) ?
+Ans:-
+
+ pig Q9_ EmployersNoPetititionsSuccessRateAbove70Percent.pig
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
