@@ -13,3 +13,10 @@ Ans:-
 hive -f Q3_IndustryHasMostDataScientistPositions.sql
 
 ---------------------------------------------------------------------------------------------------------------------------------------------
+
+7) Create a bar graph to depict the number of applications for each year [All]
+Ans:-
+
+hive -f Q7_NumberOfApplicationsForEachYear.sql
+
+---------------------------------------------------------------------------------------------------------------------------------------------
