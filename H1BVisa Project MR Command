@@ -18,10 +18,41 @@ Data Engineer Average Growth For Five Years	68.809146570357
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
+1 b) Find top 5 job titles who are having highest avg growth in applications.[ALL]
+Ans:-
+
+Using Chain MR:-
+
+hadoop jar h1bvisa.jar com.niit.h1bvisa.Q1B_UsingChainMR_Top5JobHighestAvgGrowth /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q1B_UsingChainMR_Top5JobHighestAvgGrowth
+
+hadoop fs -cat /H1BVisaProject/Q1B_UsingChainMR_Top5JobHighestAvgGrowth/p*
+
+BUSINESS ANALYST 2	4930.0
+SENIOR SYSTEMS ANALYST JC60	4255.464472401351
+PROGRAMMER/ DEVELOPER	4160.0
+BUSINESS SYSTEMS ANALYST 2	3966.6666666666665
+SOFTWARE DEVELOPER 2	3480.5924860255664
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+Using TreeMap:-
+
+hadoop jar h1bvisa.jar com.niit.h1bvisa.Q1B_UsingTreeMap_Top5JobHighestAvgGrowth /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q1B_UsingTreeMap_Top5JobHighestAvgGrowth
+
+hadoop fs -cat /H1BVisaProject/Q1B_UsingTreeMap_Top5JobHighestAvgGrowth/p*
+
+BUSINESS ANALYST 2	4930.000000
+SENIOR SYSTEMS ANALYST JC60	4255.464472
+PROGRAMMER/ DEVELOPER	4160.000000
+BUSINESS SYSTEMS ANALYST 2	3966.666667
+SOFTWARE DEVELOPER 2	3480.592486
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
 2 a) Which part of the US has the most Data Engineer jobs for each year?
 Ans:-
 
-hadoop jar h1bvisa.jar com.niit.h1bvisa.Q2A_WorksiteInUSForDataEngineerJob /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q2A_WorksiteInUSForDataEngineerJob
+hadoop jar h1bvisa.jar com.niit.h1bvisa.Q2A_WorksiteInUSForDataEngineerJob /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q2A_WorksiteInUSForDataEngineerJob ALL
 
 hadoop fs -cat /H1BVisaProject/Q2A_WorksiteInUSForDataEngineerJob/p*
 
@@ -58,6 +89,45 @@ hadoop fs -cat /H1BVisaProject/Q2A_WorksiteInUSForDataEngineerJob/p*
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 
+2 b) find top 5 locations in the US who have got certified visa for each year.[certified]
+Ans:-
+
+hadoop jar h1bvisa.jar com.niit.h1bvisa.Q2B_Top5LocationsInUSGotCertifiedVisaForEachYear /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q2B_Top5LocationsInUSGotCertifiedVisaForEachYear ALL
+
+hadoop fs -cat /H1BVisaProject/Q2B_Top5LocationsInUSGotCertifiedVisaForEachYear/p*
+
+2011	NEW YORK, NEW YORK	23172
+2011	HOUSTON, TEXAS	8184
+2011	CHICAGO, ILLINOIS	5188
+2011	SAN JOSE, CALIFORNIA	4713
+2011	SAN FRANCISCO, CALIFORNIA	4711
+2012	NEW YORK, NEW YORK	23737
+2012	HOUSTON, TEXAS	9963
+2012	SAN FRANCISCO, CALIFORNIA	6116
+2012	CHICAGO, ILLINOIS	5671
+2012	ATLANTA, GEORGIA	5565
+2013	NEW YORK, NEW YORK	23537
+2013	HOUSTON, TEXAS	11136
+2013	SAN FRANCISCO, CALIFORNIA	7281
+2013	SAN JOSE, CALIFORNIA	6722
+2013	ATLANTA, GEORGIA	6377
+2014	NEW YORK, NEW YORK	27634
+2014	HOUSTON, TEXAS	13360
+2014	SAN FRANCISCO, CALIFORNIA	9798
+2014	SAN JOSE, CALIFORNIA	8223
+2014	ATLANTA, GEORGIA	8213
+2015	NEW YORK, NEW YORK	31266
+2015	HOUSTON, TEXAS	15242
+2015	SAN FRANCISCO, CALIFORNIA	12594
+2015	ATLANTA, GEORGIA	10500
+2015	SAN JOSE, CALIFORNIA	9589
+2016	NEW YORK, NEW YORK	34639
+2016	SAN FRANCISCO, CALIFORNIA	13836
+2016	HOUSTON, TEXAS	13655
+2016	ATLANTA, GEORGIA	11678
+2016	CHICAGO, ILLINOIS	11064
+
+----------------------------------------------------------------------------------------------------------------------------------------
 
 3)Which industry(SOC_NAME) has the most number of Data Scientist positions? [certified]
 Ans:-
@@ -89,7 +159,7 @@ COMPUTER OCCUPATIONS, ALL OTHER	160
 4)Which top 5 employers file the most petitions each year? - Case Status - ALL
 Ans:-
 
-hadoop jar h1bvisa.jar com.niit.h1bvisa.Q4_Top5EmployersWithMostPetitions /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q4_Top5EmployersWithMostPetitions
+hadoop jar h1bvisa.jar com.niit.h1bvisa.Q4_Top5EmployersWithMostPetitions /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q4_Top5EmployersWithMostPetitions ALL
 
 hadoop fs -cat /H1BVisaProject/Q4_Top5EmployersWithMostPetitions/p*
 
@@ -130,7 +200,7 @@ hadoop fs -cat /H1BVisaProject/Q4_Top5EmployersWithMostPetitions/p*
 a) for all the applications
 Ans:-
 
-hadoop jar h1bvisa.jar com.niit.h1bvisa.Q5A_MostPopularTop10JobPositions /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q5A_MostPopularTop10JobPositions
+hadoop jar h1bvisa.jar com.niit.h1bvisa.Q5A_MostPopularTop10JobPositions /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q5A_MostPopularTop10JobPositions ALL
 
 hadoop fs -cat /H1BVisaProject/Q5A_MostPopularTop10JobPositions/p*
 
@@ -200,7 +270,7 @@ hadoop fs -cat /H1BVisaProject/Q5A_MostPopularTop10JobPositions/p*
 b) for only certified applications.
 Ans:-
 
-hadoop jar h1bvisa.jar com.niit.h1bvisa.Q5B_MostPopularCertifiedTop10JobPositions /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q5B_MostPopularCertifiedTop10JobPositions
+hadoop jar h1bvisa.jar com.niit.h1bvisa.Q5B_MostPopularCertifiedTop10JobPositions /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q5B_MostPopularCertifiedTop10JobPositions ALL
 
 hadoop fs -cat /H1BVisaProject/Q5B_MostPopularCertifiedTop10JobPositions/p*
 
@@ -270,7 +340,7 @@ hadoop fs -cat /H1BVisaProject/Q5B_MostPopularCertifiedTop10JobPositions/p*
 6) Find the percentage and the count of each case status on total applications for each year. Create a line graph depicting the pattern of All the cases over the period of time.
 
 Ans:-
-hadoop jar h1bvisa.jar com.niit.h1bvisa.Q6_CaseStatusPercentOnTotalApplicationYearWise /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q6_CaseStatusPercentOnTotalApplicationYearWise
+hadoop jar h1bvisa.jar com.niit.h1bvisa.Q6_CaseStatusPercentOnTotalApplicationYearWise /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q6_CaseStatusPercentOnTotalApplicationYearWise ALL
 
 hadoop fs -cat /H1BVisaProject/Q6_CaseStatusPercentOnTotalApplicationYearWise/p*
 
@@ -286,7 +356,7 @@ hadoop fs -cat /H1BVisaProject/Q6_CaseStatusPercentOnTotalApplicationYearWise/p*
 7) Create a bar graph to depict the number of applications for each year [All]
 Ans:-
 
-hadoop jar h1bvisa.jar com.niit.h1bvisa.Q7_NumberOfApplicationForEachYear /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q7_NumberOfApplicationForEachYear
+hadoop jar h1bvisa.jar com.niit.h1bvisa.Q7_NumberOfApplicationForEachYear /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q7_NumberOfApplicationForEachYear ALL
 
 hadoop fs -cat /H1BVisaProject/Q7_NumberOfApplicationForEachYear/p*
 2011	358767
@@ -297,5 +367,49 @@ hadoop fs -cat /H1BVisaProject/Q7_NumberOfApplicationForEachYear/p*
 2016	647803
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------
+
+8) Find the average Prevailing Wage for each Job for each Year (take part time and full time separate). Arrange the output in descending order - [Certified and Certified Withdrawn.]
+Ans:-
+
+hadoop jar h1bvisa.jar com.niit.h1bvisa.Q8A_AvgPrWageForEachJobForEachYearFullTime /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q8A_AvgPrWageForEachJobForEachYearFullTime ALL
+
+hadoop fs -cat /H1BVisaProject/Q8A_AvgPrWageForEachJobForEachYearFullTime/p*
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+hadoop jar h1bvisa.jar com.niit.h1bvisa.Q8B_AvgPrWageForEachJobForEachYearPartTime /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q8B_AvgPrWageForEachJobForEachYearPartTime ALL
+
+hadoop fs -cat /H1BVisaProject/Q8B_AvgPrWageForEachJobForEachYearPartTime/p*
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+9) Which are the employers along with the number of petitions who have the success rate more than 70%  in petitions. (total petitions filed 1000 OR more than 1000) ?
+Ans:-
+
+Using TreeMap:-
+
+hadoop jar h1bvisa.jar com.niit.h1bvisa.Q9_EmployersNoPetititionsSuccessRateAbove70Percent /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q9_EmployersNoPetititionsSuccessRateAbove70Percent
+
+hadoop fs -cat /H1BVisaProject/Q9_EmployersNoPetititionsSuccessRateAbove70Percent/p*
+
+Using Chain MR:-
+
+hadoop jar h1bvisa.jar com.niit.h1bvisa.Q9_EmployersNoPetititionsSuccessRateAbove70PercentChainMR /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q9_EmployersNoPetititionsSuccessRateAbove70PercentChainMR
+
+
+hadoop fs -cat /H1BVisaProject/Q9_EmployersNoPetititionsSuccessRateAbove70PercentChainMR/p*
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+10) Which are the  job positions along with the number of petitions which have the success rate more than 70%  in petitions (total petitions filed 1000 OR more than 1000)?
+Ans:-
+
+hadoop jar h1bvisa.jar com.niit.h1bvisa.Q10_JobPositionsNoPetitionsSuccessRateAbove70Percent /user/hive/warehouse/h1b.db/h1b_final /H1BVisaProject/Q10_JobPositionsNoPetitionsSuccessRateAbove70Percent
+
+hadoop fs -cat /H1BVisaProject/Q10_JobPositionsNoPetitionsSuccessRateAbove70Percent/p*
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
