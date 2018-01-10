@@ -126,7 +126,6 @@ public class Q1B_UsingTreeMap_Top5JobHighestAvgGrowth {
 				top5Job.remove(top5Job.firstKey());
 			}
 		}
-
 		@Override
 		protected void cleanup(Context context) throws IOException, InterruptedException 
 		{
