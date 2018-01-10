@@ -34,43 +34,35 @@ allcount = FOREACH allgrouped GENERATE group AS employer_name,COUNT(finalh1b) AS
 
 --------------------------------------------------------------------------------------------------------------------------------------
 
-filterh1b1 = FILTER finalh1b BY case_status == 'CERTIFIED-WITHDRAWN';
+filterh1b = FILTER finalh1b BY case_status == 'CERTIFIED-WITHDRAWN' OR case_status == 'CERTIFIED';
 
---DESCRIBE filterh1b1;
---filterh1b1: {case_status: chararray,employer_name: chararray}
-
-
-successgrouped1 = GROUP filterh1b1 BY employer_name;
-
---DESCRIBE successgrouped1;
---successgrouped1: {group: chararray,filterh1b1: {(case_status: chararray,employer_name: chararray)}}
+--DESCRIBE filterh1b;
+--filterh1b: {case_status: chararray,employer_name: chararray}
 
 
-successcount1 = FOREACH successgrouped1 GENERATE group AS employer_name,COUNT(filterh1b1) AS totalsuccess1;
+successgrouped = GROUP filterh1b BY employer_name;
 
--- DESCRIBE successcount1;  
---successcount1: {employer_name: chararray,totalsuccess1: long}
+--DESCRIBE successgrouped;
+--successgrouped: {group: chararray,filterh1b: {(case_status: chararray,employer_name: chararray)}}
+
+
+successcount = FOREACH successgrouped GENERATE group AS employer_name,COUNT(filterh1b) AS totalsuccess;
+
+-- DESCRIBE successcount;  
+--successcount: {employer_name: chararray,totalsuccess: long}
 
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
-filterh1b2 = FILTER finalh1b BY case_status == 'CERTIFIED';
 
-successgrouped2 = GROUP filterh1b2 BY employer_name;
-
-successcount2 = FOREACH successgrouped2 GENERATE group AS employer_name,COUNT(filterh1b2) AS totalsuccess2;
-
--------------------------------------------------------------------------------------------------------------------------------------
-
-
-joined = JOIN allcount BY $0, successcount1 BY $0, successcount2 BY $0;
+joined = JOIN allcount BY $0, successcount BY $0;
 
 --DESCRIBE joined;
---joined: {allcount::employer_name: chararray,allcount::totalapplicaion: long,successcount1::employer_name: chararray,successcount1::totalsuccess1: long,successcount2::employer_name: chararray,successcount2::totalsuccess2: long}
+--joined: {allcount::employer_name: chararray,allcount::totalapplicaion: long,successcount::employer_name: chararray,successcount::totalsuccess: long}
 
 
 
-finalbag = FOREACH joined GENERATE $0 AS employer_name, $1 as petitions, (FLOAT)((($3+$5)*100)/$1) AS successrate;
+finalbag = FOREACH joined GENERATE $0 AS employer_name, $1 as petitions, (FLOAT)(($3*100)/$1) AS successrate;
 
 --DESCRIBE finalbag;
 --finalbag: {employer_name: chararray,petitions: long,successrate: float}
@@ -90,16 +82,10 @@ STORE finaloutput INTO '/H1BVisaProject/Pig/Q9_EmployersWithNoPetititionsHavingS
 
 
 DUMP finaloutput;
---Top 10 employee name whose suceess rate > 70% and petitions >=1000
---(HCL AMERICA, INC.,22678,99.0)
---(RELIABLE SOFTWARE RESOURCES, INC.,1992,99.0)
---(TATA CONSULTANCY SERVICES LIMITED,64726,99.0)
---(ERP ANALYSTS, INC.,1785,99.0)
---(PATNI AMERICAS INC.,3149,99.0)
---(ACCENTURE LLP,33447,99.0)
---(KFORCE INC.,1596,99.0)
---(NTT DATA, INC.,4611,99.0)
---(INFOSYS LIMITED,130592,99.0)
---(BLOOMBERG, LP,2352,98.0)
+--(HTC GLOBAL SERVICES, INC.,1164,100.0)
+--(HTC GLOBAL SERVICES INC.,2632,100.0)
+--(YASH TECHNOLOGIES, INC.,2214,99.0)
+--(YASH & LUJAN CONSULTING, INC.,1372,99.0)
+--(TECH MAHINDRA (AMERICAS),INC.,10732,99.0)
 
 

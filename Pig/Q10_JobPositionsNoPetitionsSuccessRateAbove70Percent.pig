@@ -35,42 +35,33 @@ allcount = FOREACH allgrouped GENERATE group as job_title,COUNT(finalh1b) AS tot
 ------------------------------------------------------------------------------------------------------------------------------------
 
 
-filterh1b1 = FILTER finalh1b BY case_status == 'CERTIFIED-WITHDRAWN';
+filterh1b = FILTER finalh1b BY case_status == 'CERTIFIED-WITHDRAWN' OR case_status == 'CERTIFIED';
 
---DESCRIBE filterh1b1;
---filterh1b1: {case_status: chararray,job_title: chararray}
-
-
-successgrouped1 = GROUP filterh1b1 BY job_title;
-
--- DESCRIBE successgrouped1;
---successgrouped1: {group: chararray,filterh1b1: {(case_status: chararray,job_title: chararray)}}
+--DESCRIBE filterh1b;
+--filterh1b: {case_status: chararray,job_title: chararray}
 
 
-successcount1 = FOREACH successgrouped1 GENERATE group AS job_title,COUNT(filterh1b1) AS totalsuccess1;
+successgrouped = GROUP filterh1b BY job_title;
 
---DESCRIBE successcount1;
---successcount1: {job_title: chararray,totalsuccess1: long}
-
--------------------------------------------------------------------------------------------------------------------------------------
+-- DESCRIBE successgrouped;
+--successgrouped: {group: chararray,filterh1b: {(case_status: chararray,job_title: chararray)}}
 
 
-filterh1b2 = FILTER finalh1b BY case_status == 'CERTIFIED';
+successcount = FOREACH successgrouped GENERATE group AS job_title,COUNT(filterh1b) AS totalsuccess;
 
-successgrouped2 = GROUP filterh1b2 BY job_title;
-
-successcount2 = FOREACH successgrouped2 GENERATE group AS job_title,COUNT(filterh1b2) AS totalsuccess2;
-
+--DESCRIBE successcount;
+--successcount: {job_title: chararray,totalsuccess: long}
 
 -------------------------------------------------------------------------------------------------------------------------------------
 
-joined = JOIN allcount BY $0, successcount1 BY $0, successcount2 BY $0;
+
+joined = JOIN allcount BY $0, successcount BY $0;
 
 --DESCRIBE joined;
---joined: {allcount::job_title: chararray,allcount::totalapplicaion: long,successcount1::job_title: chararray,successcount1::totalsuccess1: long,successcount2::job_title: chararray,successcount2::totalsuccess2: long}
+--joined: {allcount::job_title: chararray,allcount::totalapplicaion: long,successcount::job_title: chararray,successcount::totalsuccess: long}
 
 
-finalbag = FOREACH joined GENERATE $0 AS job_title, $1 as petitions, (FLOAT)((($3+$5)*100)/$1) AS successrate;
+finalbag = FOREACH joined GENERATE $0 AS job_title, $1 as petitions, (FLOAT)(($3*100)/$1) AS successrate;
 
 --DESCRIBE finalbag;
 --finalbag: {job_title: chararray,petitions: long,successrate: float}
@@ -87,5 +78,10 @@ finaloutput = ORDER filtersuccessrate BY successrate DESC;
 STORE finaloutput INTO '/H1BVisaProject/Pig/Q10_JobPositionsWithNoPetititionsHavingSuccessRateAbove70Percent' USING PigStorage();
 
 DUMP finaloutput;
+--(COMPUTER PROGRAMMER / CONFIGURER 2,1276,100.0)
+--(PRODUCTION SUPPORT LEAD - US,1301,100.0)
+--(PROGRAMMER ANALYST - II,3588,99.0)
+--(LEAD CONSULTANT - US,3402,99.0)
+--(PROJECT MANAGER - US,7046,99.0)
 
 
