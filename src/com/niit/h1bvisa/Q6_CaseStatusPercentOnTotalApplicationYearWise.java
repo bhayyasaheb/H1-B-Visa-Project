@@ -95,8 +95,17 @@ public class Q6_CaseStatusPercentOnTotalApplicationYearWise {
 			 
 			 deni_percent = (deniedcount*100)/allcount;
 			
-			String myValue = String.format("%f", cert_percent) +","+String.format("%f", certwith__percent)
-							+","+String.format("%f", with_percent)+","+String.format("%f", deni_percent);
+			 String certTotal = String.format("%.2f", certifiedcount);
+			 String certwithTotal = String.format("%.2f", certified_withdrawncount);
+			 String withTotal = String.format("%.2f", withdrawncount);
+			 String deniedTotal = String.format("%.2f", deniedcount);
+			 
+			 String certPercent = String.format("%.2f", cert_percent);
+			 String certwithPercent = String.format("%.2f", certwith__percent);
+			 String withPercent = String.format("%.2f", with_percent);
+			 String deninedPercent = String.format("%.2f", deni_percent);
+			 
+			String myValue =  certTotal+","+certPercent+","+ certwithTotal+","+certwithPercent+","+withTotal+","+withPercent+","+deniedTotal+","+deninedPercent;
 			
 			context.write(key, new Text(myValue));
 		}
