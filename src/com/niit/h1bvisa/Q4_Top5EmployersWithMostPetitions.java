@@ -27,13 +27,24 @@ public class Q4_Top5EmployersWithMostPetitions {
 		@Override
 		protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException 
 		{
+			String mySearchText = context.getConfiguration().get("myText");
+			
 			String[] record = value.toString().split("\t");
 			String year = record[7];
 			String employee_name = record[2];
 			
-			String myVal = year+ ","+one;
+			if(mySearchText.equals("ALL"))
+			{
+				context.write(new Text(employee_name), new Text(year));
+			}
+			else
+			{
+				if(year.equals(mySearchText))
+				{
+					context.write(new Text(employee_name), new Text(year));
+				}
+			}
 			
-			context.write(new Text(employee_name), new Text(myVal));
 		}
 		
 	}
@@ -47,9 +58,7 @@ public class Q4_Top5EmployersWithMostPetitions {
 		@Override
 		public int getPartition(Text key, Text value, int numReduceTasks) {
 		
-			String[] str = value.toString().split(",");
-			
-			String year = str[0];
+			String year = value.toString();
 			
 			if(year.equals("2011"))
 			{
@@ -88,21 +97,18 @@ public class Q4_Top5EmployersWithMostPetitions {
 		@Override
 		protected void reduce(Text key, Iterable<Text> values,Context context)throws IOException, InterruptedException 
 		{
-			int sum = 0;
+			int count = 0;
 			String year = "";
 			for(Text val : values)
 			{
-				String[] token = val.toString().split(",");
-				year = token[0];
-				int count = Integer.parseInt(token[1]);
-				
-				sum += count;
+				year = val.toString();
+				count++;
 			}
 			
 			String employee_name = key.toString();
-			String myValue = year+ ","+employee_name + "," + sum;
+			String myValue = year+ ","+employee_name + "," + count;
 			
-			map.put(new Integer(sum), new Text(myValue));
+			map.put(new Integer(count), new Text(myValue));
 			if(map.size() > 5)
 			{
 				map.remove(map.firstKey());
@@ -128,14 +134,27 @@ public class Q4_Top5EmployersWithMostPetitions {
 		
 		Configuration conf =  new Configuration();
 		
+		if(args.length > 2)
+		{
+			conf.set("myText", args[2]);
+		}
+		else
+		{
+			System.out.println("Number of arguments should be 3");
+			System.exit(0);
+		}
+		
 		Job job = Job.getInstance(conf, "Top 5 Petitions for each Year");
 		
 		job.setJarByClass(Q4_Top5EmployersWithMostPetitions.class);
 		
 		job.setMapperClass(EmployeeMapper.class);
 		
-		job.setPartitionerClass(YearPartitioner.class);
-		job.setNumReduceTasks(6);
+		if(args[2].equals("ALL"))
+		{
+			job.setPartitionerClass(YearPartitioner.class);
+			job.setNumReduceTasks(6);
+		}
 		
 		job.setReducerClass(EmployeeReducer.class);
 		

@@ -26,6 +26,9 @@ public class Q2A_WorksiteInUSForDataEngineerJob {
 		@Override
 		protected void map(LongWritable key, Text value, Context context)throws IOException, InterruptedException 
 		{
+			String mySearchText = context.getConfiguration().get("myText");
+			
+			
 			String[] record = value.toString().split("\t");
 			
 			String case_status = record[1];
@@ -33,9 +36,19 @@ public class Q2A_WorksiteInUSForDataEngineerJob {
 			String year = record[7];
 			String worksite = record[8];
 			
-			if(case_status.equals("CERTIFIED") && job_title.contains("DATA ENGINEER"))
+			if(mySearchText.equals("ALL"))
 			{
-				context.write(new Text(worksite), new Text(year));
+				if(case_status.equals("CERTIFIED") && job_title.contains("DATA ENGINEER"))
+				{
+					context.write(new Text(worksite), new Text(year));
+				}
+			}
+			else
+			{
+				if(case_status.equals("CERTIFIED") && job_title.contains("DATA ENGINEER") && year.equals(mySearchText))
+				{
+					context.write(new Text(worksite), new Text(year));
+				}
 			}
 		}
 		
@@ -129,14 +142,27 @@ public class Q2A_WorksiteInUSForDataEngineerJob {
 		
 		Configuration conf  = new Configuration();
 		
+		if(args.length > 2)
+		{
+			conf.set("myText", args[2]);
+		}
+		else
+		{
+			System.out.println("Number of arguments should be 3");
+			System.exit(0);
+		}
+		
 		Job job = Job.getInstance(conf, "Worsite having Most data engineer job in US for each year");
 		
 		job.setJarByClass(Q2A_WorksiteInUSForDataEngineerJob.class);
 		
 		job.setMapperClass(WorksiteMapper.class);
 		
-		job.setPartitionerClass(YearPartitioner.class);
-		job.setNumReduceTasks(6);
+		if(args[2].equals("ALL"))
+		{
+			job.setPartitionerClass(YearPartitioner.class);
+			job.setNumReduceTasks(6);
+		}
 		
 		job.setReducerClass(WorksiteReducer.class);
 		

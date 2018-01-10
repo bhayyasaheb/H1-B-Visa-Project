@@ -21,11 +21,23 @@ public class Q7_NumberOfApplicationForEachYear {
 		@Override
 		protected void map(LongWritable key, Text value, Context context)throws IOException, InterruptedException 
 		{
+			String mySearchText = context.getConfiguration().get("myText");
+			
 			String[] record = value.toString().split("\t");
 			
 			String year = record[7];
 			
-			context.write(new Text(year), new IntWritable(1));
+			if(mySearchText.equals("ALL"))
+			{
+				context.write(new Text(year), new IntWritable(1));
+			}
+			else
+			{
+				if(year.equals(mySearchText))
+				{
+					context.write(new Text(year), new IntWritable(1));
+				}
+			}
 		}
 		
 	}
@@ -50,6 +62,16 @@ public class Q7_NumberOfApplicationForEachYear {
 	public static void main(String[] args) throws Exception {
 		
 		Configuration conf = new Configuration();
+		
+		if(args.length > 2)
+		{
+			conf.set("myText", args[2]);
+		}
+		else
+		{
+			System.out.println("Number of arguments should be 3");
+			System.exit(0);
+		}
 		
 		Job job = Job.getInstance(conf,"Number of Applications for each Year");
 		

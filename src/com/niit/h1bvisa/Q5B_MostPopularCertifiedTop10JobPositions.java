@@ -26,13 +26,26 @@ public class Q5B_MostPopularCertifiedTop10JobPositions {
 		@Override
 		protected void map(LongWritable key, Text value, Context context)throws IOException, InterruptedException 
 		{
+			String mySearchText = context.getConfiguration().get("myText");
+			
 			String[] record = value.toString().split("\t");
 			String year = record[7];
 			String job_title = record[4];
 			String case_status = record[1];
-			if(case_status.equals("CERTIFIED"))
+			
+			if(mySearchText.equals("ALL"))
 			{
-				context.write(new Text(job_title), new Text(year));
+				if(case_status.equals("CERTIFIED"))
+				{
+					context.write(new Text(job_title), new Text(year));
+				}
+			}
+			else
+			{
+				if(case_status.equals("CERTIFIED") && year.equals(mySearchText))
+				{
+					context.write(new Text(job_title), new Text(year));
+				}
 			}
 		}
 		
@@ -125,14 +138,27 @@ public class Q5B_MostPopularCertifiedTop10JobPositions {
 		
 		Configuration conf = new Configuration();
 		
+		if(args.length > 2)
+		{
+			conf.set("myText", args[2]);
+		}
+		else
+		{
+			System.out.println("Number of arguments should be 3");
+			System.exit(0);
+		}
+		
 		Job job = Job.getInstance(conf, "Top 10 Job Positios for each Year for Only Certified Case Status");
 		
 		job.setJarByClass(Q5A_MostPopularTop10JobPositions.class);
 		
 		job.setMapperClass(CertifiedJobMapper.class);
 		
-		job.setPartitionerClass(YearPartitioner.class);
-		job.setNumReduceTasks(6);
+		if(args[2].equals("ALL"))
+		{
+			job.setPartitionerClass(YearPartitioner.class);
+			job.setNumReduceTasks(6);
+		}
 		
 		job.setReducerClass(CertifiedJobReducer.class);
 		

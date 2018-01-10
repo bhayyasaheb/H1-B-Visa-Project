@@ -26,11 +26,23 @@ public class Q5A_MostPopularTop10JobPositions {
 		@Override
 		protected void map(LongWritable key, Text value, Context context)throws IOException, InterruptedException 
 		{
+			String mySearchText = context.getConfiguration().get("myText");
+			
 			String[] record = value.toString().split("\t");
 			String year = record[7];
 			String job_title = record[4];
 			
-			context.write(new Text(job_title), new Text(year));
+			if(mySearchText.equals("ALL"))
+			{
+				context.write(new Text(job_title), new Text(year));
+			}
+			else
+			{
+				if(year.equals(mySearchText))
+				{
+					context.write(new Text(job_title), new Text(year));
+				}
+			}
 		}
 		
 	}
@@ -122,14 +134,27 @@ public class Q5A_MostPopularTop10JobPositions {
 		
 		Configuration conf = new Configuration();
 		
+		if(args.length > 2)
+		{
+			conf.set("myText", args[2]);
+		}
+		else
+		{
+			System.out.println("Number of arguments should be 3");
+			System.exit(0);
+		}
+		
 		Job job = Job.getInstance(conf, "Top 10 Job Positios for each Year for All Case Status");
 		
 		job.setJarByClass(Q5A_MostPopularTop10JobPositions.class);
 		
 		job.setMapperClass(JobMapper.class);
 		
-		job.setPartitionerClass(YearPartitioner.class);
-		job.setNumReduceTasks(6);
+		if(args[2].equals("ALL"))
+		{
+			job.setPartitionerClass(YearPartitioner.class);
+			job.setNumReduceTasks(6);
+		}
 		
 		job.setReducerClass(JobReducer.class);
 		

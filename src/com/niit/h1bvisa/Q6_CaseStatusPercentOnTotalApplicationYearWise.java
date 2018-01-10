@@ -22,11 +22,23 @@ public class Q6_CaseStatusPercentOnTotalApplicationYearWise {
 		@Override
 		protected void map(LongWritable key, Text value, Context context)throws IOException, InterruptedException 
 		{
+			String myTextSearch = context.getConfiguration().get("myText");
+			
 			String[] record = value.toString().split("\t");
 			String case_status = record[1];
 			String year = record[7];
 			
-			context.write(new Text(year), new Text(case_status));
+			if(myTextSearch.equals("ALL"))
+			{
+				context.write(new Text(year), new Text(case_status));
+			}
+			else
+			{
+				if(year.equals(myTextSearch))
+				{
+					context.write(new Text(year), new Text(case_status));
+				}
+			}
 		}	
 	}
 	
@@ -94,9 +106,20 @@ public class Q6_CaseStatusPercentOnTotalApplicationYearWise {
 		 * Driver class or Configuration code
 		 */
 		public static void main(String[] args) throws Exception {
+			
 			Configuration conf = new Configuration();
 			
 			conf.set("mapreduce.output.textoutputformat.separator",",");
+			
+			if(args.length > 2)
+			{
+				conf.set("myText", args[2]);
+			}
+			else
+			{
+				System.out.println("Number of arguments should be 3");
+				System.exit(0);
+			}
 			
 			Job job = Job.getInstance(conf,"Percentage and Count of each case status on total Applications for each year");
 			
