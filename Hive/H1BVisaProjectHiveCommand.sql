@@ -54,4 +54,7 @@ hive -f /home/hduser/Desktop/H1BVisaProject/Hive/Q9_EmployersNumberPetitionsSuce
 
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
+10) Which are the  job positions along with the number of petitions which have the success rate more than 70%  in petitions (total petitions filed 1000 OR more than 1000)?
+Ans:- 
 
+hive -f /home/hduser/Desktop/H1BVisaProject/Hive/Q10_JopPositionsNumberPetitionsSuccessRate.sql
