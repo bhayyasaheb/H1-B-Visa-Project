@@ -11,6 +11,11 @@ ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
 
 INSERT OVERWRITE TABLE total_applications SELECT year,COUNT(*) FROM h1b_final GROUP BY year;
 
+--Saving output in HDFS
+INSERT OVERWRITE DIRECTORY '/H1BVisaProject/Hive/Q6_PercentCountCaseStatusYear' ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' 
+SELECT  a.year, a.case_status,COUNT(*) AS statusTotal, ROUND((COUNT(*)/b.total)*100, 2) AS finalPercent FROM h1b_final a, total_applications b WHERE a.year = b.year GROUP BY a.case_status,b.total,a.year ORDER BY a.year,a.case_status;
+
+
 SELECT  a.year, a.case_status,COUNT(*) AS statusTotal, ROUND((COUNT(*)/b.total)*100, 2) AS finalPercent FROM h1b_final a, total_applications b WHERE a.year = b.year GROUP BY a.case_status,b.total,a.year ORDER BY a.year,a.case_status;
 
 --a.year	a.case_status	statustotal	finalpercent

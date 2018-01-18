@@ -55,7 +55,7 @@ INSERT OVERWRITE TABLE avgprewagefull2016
 SELECT year, case_status, job_title, full_time_position, AVG(prevailing_wage) AS avgprewage FROM h1b_final WHERE year = '2016' AND full_time_position = 'Y'  AND case_status IN ('CERTIFIED','CERTIFIED-WITHDRAWN') GROUP BY year, case_status, job_title, full_time_position ORDER BY avgprewage DESC LIMIT 10;
 
 
-
+--Saving output in HDFS
 INSERT OVERWRITE DIRECTORY '/H1BVisaProject/Hive/Q8A_Top10AvgPreWageForEachJobAndYearFullTime' ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' 
 SELECT * FROM(
 SELECT year, case_status, job_title, full_time_position, avgprewage  FROM avgprewagefull2011
@@ -72,7 +72,25 @@ SELECT year, case_status, job_title, full_time_position, avgprewage  FROM avgpre
 ) Top10AvgPreWageForEachJobAndYearFullTime
 ORDER BY year,avgprewage DESC; 
 
+
+SELECT * FROM(
+SELECT year, case_status, job_title, full_time_position, avgprewage  FROM avgprewagefull2011
+UNION
+SELECT year, case_status, job_title, full_time_position, avgprewage  FROM avgprewagefull2012
+UNION
+SELECT year, case_status, job_title, full_time_position, avgprewage  FROM avgprewagefull2013
+UNION
+SELECT year, case_status, job_title, full_time_position, avgprewage  FROM avgprewagefull2014
+UNION
+SELECT year, case_status, job_title, full_time_position, avgprewage  FROM avgprewagefull2015
+UNION
+SELECT year, case_status, job_title, full_time_position, avgprewage  FROM avgprewagefull2016
+) Top10AvgPreWageForEachJobAndYearFullTime
+ORDER BY year,avgprewage DESC; 
+
+
 /*
+
 2011	CERTIFIED-WITHDRAWN	AREA MANAGER, PHARMACEUTICAL PACKAGING	Y	212987840
 2011	CERTIFIED-WITHDRAWN	DEVELOPER (SOFTWARE SYSTEMS APPLICATIONS)	Y	176560800
 2011	CERTIFIED	SYSTEMS ENGINEER (DIAGNOSTICS)	Y	95526080

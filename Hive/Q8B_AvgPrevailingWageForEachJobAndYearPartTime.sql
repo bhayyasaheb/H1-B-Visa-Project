@@ -57,7 +57,24 @@ INSERT OVERWRITE TABLE avgprewagepart2016
 SELECT year, case_status, job_title, full_time_position, AVG(prevailing_wage) AS avgprewage FROM h1b_final WHERE year = '2016' AND full_time_position = 'N' AND case_status IN ('CERTIFIED','CERTIFIED-WITHDRAWN') GROUP BY year, case_status, job_title, full_time_position ORDER BY avgprewage DESC LIMIT 10;
 
 
+--Saving output in HDFS
 INSERT OVERWRITE DIRECTORY '/H1BVisaProject/Hive/Q8B_Top10AvgPreWageForEachJobAndYearPartTime' ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' 
+SELECT * FROM(
+SELECT year, case_status, job_title, full_time_position, avgprewage  FROM avgprewagepart2011
+UNION
+SELECT year, case_status, job_title, full_time_position, avgprewage  FROM avgprewagepart2012
+UNION
+SELECT year, case_status, job_title, full_time_position, avgprewage  FROM avgprewagepart2013
+UNION
+SELECT year, case_status, job_title, full_time_position, avgprewage  FROM avgprewagepart2014
+UNION
+SELECT year, case_status, job_title, full_time_position, avgprewage  FROM avgprewagepart2015
+UNION
+SELECT year, case_status, job_title, full_time_position, avgprewage  FROM avgprewagepart2016
+) Top10AvgPreWageForEachJobAndYearPartTime
+ORDER BY year,avgprewage DESC; 
+
+
 SELECT * FROM(
 SELECT year, case_status, job_title, full_time_position, avgprewage  FROM avgprewagepart2011
 UNION

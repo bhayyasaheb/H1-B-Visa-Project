@@ -14,9 +14,9 @@ SELECT year,worksite, COUNT(*) AS total FROM h1b_final WHERE job_title LIKE '%DA
 SELECT year,worksite, COUNT(*) AS total FROM h1b_final WHERE job_title LIKE '%DATA ENGINEER%' AND case_status = 'CERTIFIED' AND year = '2016' GROUP BY year,worksite ORDER BY total DESC LIMIT 5;
 
 
+/*
 
 output:-
-
 year	worksite	total
 2011	SEATTLE, WASHINGTON	19
 2011	NEW YORK, NEW YORK	4
@@ -59,5 +59,5 @@ year	worksite	total
 2016	MENLO PARK, CALIFORNIA	38
 2016	IRVINE, CALIFORNIA	17
 
-
+*/
 

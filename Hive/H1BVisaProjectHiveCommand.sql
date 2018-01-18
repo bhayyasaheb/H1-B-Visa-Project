@@ -1,8 +1,15 @@
 
-Q1 a) Is the number of petitions with Data Engineer job title increasing over time?
+Q1 a) Is the number of petitions with Data Engineer job title increasing over time?[ALL]
 Ans:- 
 
 hive -f /home/hduser/Desktop/H1BVisaProject/Hive/Q1A_DataEnggJob.sql
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+Q1 b) Find top 5 job titles who are having highest avg growth in applications.[ALL]
+Ans:-
+
+hive -f /home/hduser/Desktop/H1BVisaProject/Hive/Q1B_Top5JobTitlesHighAvgGrowth.sql 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 

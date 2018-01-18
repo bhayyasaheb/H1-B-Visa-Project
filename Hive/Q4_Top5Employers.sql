@@ -15,6 +15,7 @@ SELECT year,employer_name,COUNT(*) AS total FROM h1b_final WHERE year = '2015' G
 SELECT year,employer_name,COUNT(*) AS total FROM h1b_final WHERE year = '2016' GROUP BY year,employer_name ORDER BY total DESC LIMIT 5;
 
 
+/*
 year	employer_name	total
 2011	TATA CONSULTANCY SERVICES LIMITED	5416
 2011	MICROSOFT CORPORATION	4253
@@ -57,4 +58,4 @@ year	employer_name	total
 2016	WIPRO LIMITED	10607
 2016	IBM INDIA PRIVATE LIMITED	9787
 
-
+*/

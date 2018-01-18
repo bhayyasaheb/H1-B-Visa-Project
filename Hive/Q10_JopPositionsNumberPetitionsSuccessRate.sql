@@ -23,10 +23,14 @@ ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
 INSERT OVERWRITE TABLE jobsuccess_petitions SELECT job_title,COUNT(*) as successPetitions1 FROM h1b_final WHERE case_status IN ('CERTIFIED','CERTIFIED-WITHDRAWN') GROUP BY job_title;
 
 
+--Saving output in HDFS
 INSERT OVERWRITE DIRECTORY '/H1BVisaProject/Hive/Q10_JobPosistionsNumberPetitionsSuccessRate' ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
 SELECT a.job_title, b.totalPetitions1, ROUND((a.successPetitions1/b.totalPetitions1)*100,2) AS successRate FROM jobsuccess_petitions a, jobtotal_petitions b WHERE a.job_title = b.job_title AND b.totalPetitions1 >= 1000 AND ROUND((a.successPetitions1/b.totalPetitions1)*100,2) > 70  GROUP BY a.job_title, b.totalPetitions1,a.successPetitions1 ORDER BY successRate DESC;
 
---hadoop fs -cat /H1BVisaProject/Hive/Q10_JobPosistionsNumberPetitionsSuccessRate/000000_0
+
+
+SELECT a.job_title, b.totalPetitions1, ROUND((a.successPetitions1/b.totalPetitions1)*100,2) AS successRate FROM jobsuccess_petitions a, jobtotal_petitions b WHERE a.job_title = b.job_title AND b.totalPetitions1 >= 1000 AND ROUND((a.successPetitions1/b.totalPetitions1)*100,2) > 70  GROUP BY a.job_title, b.totalPetitions1,a.successPetitions1 ORDER BY successRate DESC;
+
 
 /*
 a.job_title	b.totalpetitions	successrate

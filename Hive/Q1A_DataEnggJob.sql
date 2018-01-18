@@ -23,13 +23,6 @@ INSERT OVERWRITE TABLE dataengg SELECT year,COUNT(*) FROM h1b_final WHERE job_ti
 --2016	786
 
 
---SELECT year, ROUND(((total-LAG(total,1)OVER(ORDER BY year))*100)/LAG(total,1)OVER(ORDER BY year),2) AS growthpercent FROM dataengg;
-
---OR 
-
---SELECT year, ROUND(((total-LAG(total)OVER(ORDER BY year))*100)/LAG(total)OVER(ORDER BY year),2) AS growthpercent FROM dataengg;
-
-
 
 CREATE TABLE IF NOT EXISTS dataenggpercent(year string, percent1 float)
 ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
@@ -47,11 +40,11 @@ INSERT OVERWRITE TABLE dataenggpercent SELECT year, ROUND(((total-LAG(total)over
 --2015	58.23
 --2016	99.49
 
-
-
+--Saving output in HDFS
+INSERT OVERWRITE DIRECTORY '/H1BVisaProject/Hive/Q1A_NumberPetitionsDataEnggJobIncreasingOverTime' ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' 
 SELECT ROUND(AVG(percent1),2) AS avggrowth FROM dataenggpercent;
 
---Output
+SELECT ROUND(AVG(percent1),2) AS avggrowth FROM dataenggpercent;
 --avggrowth
 --68.81
 

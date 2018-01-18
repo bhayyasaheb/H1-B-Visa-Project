@@ -15,7 +15,7 @@ SELECT year,job_title,COUNT(*) AS total FROM h1b_final WHERE year = '2015' AND c
 
 SELECT year,job_title,COUNT(*) AS total FROM h1b_final WHERE year = '2016' AND case_status = 'CERTIFIED' GROUP BY year,job_title ORDER BY total DESC LIMIT 10;
 
-
+/*
 year	job_title	total
 2011	PROGRAMMER ANALYST	28806
 2011	SOFTWARE ENGINEER	11224
@@ -88,3 +88,4 @@ year	job_title	total
 2016	SENIOR SOFTWARE ENGINEER	5630
 2016	TECHNOLOGY LEAD - US	5405
 
+*/
