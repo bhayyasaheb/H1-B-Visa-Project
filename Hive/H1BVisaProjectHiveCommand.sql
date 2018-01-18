@@ -20,6 +20,13 @@ hive -f /home/hduser/Desktop/H1BVisaProject/Hive/Q3_IndustryHasMostDataScientist
 
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
+6) Find the percentage and the count of each case status on total applications for each year. Create a line graph depicting the pattern of All the cases over the period of time.
+Ans:- 
+
+hive -f /home/hduser/Desktop/H1BVisaProject/Hive/Q6_PercentCountCaseStatus.sql
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
 7) Create a bar graph to depict the number of applications for each year [All]
 Ans:-
 
