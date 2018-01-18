@@ -46,3 +46,12 @@ Q8 B. For Part Time
 hive -f /home/hduser/Desktop/H1BVisaProject/Hive/Q8B_AvgPrevailingWageForEachJobAndYearPartTime.sql 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
+
+Q 9) Which are the employers along with the number of petitions who have the success rate more than 70%  in petitions. (total petitions filed 1000 OR more than 1000) ?
+Ans:- 
+
+hive -f /home/hduser/Desktop/H1BVisaProject/Hive/Q9_EmployersNumberPetitionsSucessRate.sql 
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
