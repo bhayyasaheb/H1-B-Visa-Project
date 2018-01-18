@@ -1,4 +1,6 @@
 
+--7) Create a bar graph to depict the number of applications for each year [All]
+
 USE h1b;
 
 --INSERT OVERWRITE DIRECTORY '/H1BVisaProject/Hive/Q7_NumberOfApplicationsForEachYear' ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
