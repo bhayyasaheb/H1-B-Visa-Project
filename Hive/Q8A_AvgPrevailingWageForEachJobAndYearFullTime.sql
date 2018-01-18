@@ -1,48 +1,62 @@
 
+--8) Find the average Prevailing Wage for each Job for each Year For only job positions full time. Arrange the output in descending order - [Certified and Certified Withdrawn.]
+
 USE h1b;
 
---CREATE TABLE avgprewagefull2011 (year string, case_status string, job_title string, full_time_position string, avgprewage bigint)
---ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
+DROP TABLE IF EXISTS avgprewagefull2011;
 
---INSERT OVERWRITE TABLE avgprewagefull2011
---SELECT year, case_status, job_title, full_time_position, AVG(prevailing_wage) AS avgprewage FROM h1b_final WHERE year = '2011' AND full_time_position = 'Y'  AND case_status IN ('CERTIFIED','CERTIFIED-WITHDRAWN') GROUP BY year, case_status, job_title, full_time_position ORDER BY avgprewage DESC LIMIT 10;
+DROP TABLE IF EXISTS avgprewagefull2012;
 
---CREATE TABLE avgprewagefull2012 (year string, case_status string, job_title string, full_time_position string, avgprewage bigint)
---ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
+DROP TABLE IF EXISTS avgprewagefull2013;
 
---INSERT OVERWRITE TABLE avgprewagefull2012
---SELECT year, case_status, job_title, full_time_position, AVG(prevailing_wage) AS avgprewage FROM h1b_final WHERE year = '2012' AND full_time_position = 'Y'  AND case_status IN ('CERTIFIED','CERTIFIED-WITHDRAWN') GROUP BY year, case_status, job_title, full_time_position ORDER BY avgprewage DESC LIMIT 10;
+DROP TABLE IF EXISTS avgprewagefull2014;
 
+DROP TABLE IF EXISTS avgprewagefull2015;
 
---CREATE TABLE avgprewagefull2013 (year string, case_status string, job_title string, full_time_position string, avgprewage bigint)
---ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
+DROP TABLE IF EXISTS avgprewagefull2016;
 
---INSERT OVERWRITE TABLE avgprewagefull2013
---SELECT year, case_status, job_title, full_time_position, AVG(prevailing_wage) AS avgprewage FROM h1b_final WHERE year = '2013' AND full_time_position = 'Y'  AND case_status IN ('CERTIFIED','CERTIFIED-WITHDRAWN') GROUP BY year, case_status, job_title, full_time_position ORDER BY avgprewage DESC LIMIT 10;
+CREATE TABLE IF NOT EXISTS avgprewagefull2011 (year string, case_status string, job_title string, full_time_position string, avgprewage bigint)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
 
+INSERT OVERWRITE TABLE avgprewagefull2011
+SELECT year, case_status, job_title, full_time_position, AVG(prevailing_wage) AS avgprewage FROM h1b_final WHERE year = '2011' AND full_time_position = 'Y'  AND case_status IN ('CERTIFIED','CERTIFIED-WITHDRAWN') GROUP BY year, case_status, job_title, full_time_position ORDER BY avgprewage DESC LIMIT 10;
 
---CREATE TABLE avgprewagefull2014 (year string, case_status string, job_title string, full_time_position string, avgprewage bigint)
---ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
+CREATE TABLE IF NOT EXISTS avgprewagefull2012 (year string, case_status string, job_title string, full_time_position string, avgprewage bigint)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
 
---INSERT OVERWRITE TABLE avgprewagefull2014
---SELECT year, case_status, job_title, full_time_position, AVG(prevailing_wage) AS avgprewage FROM h1b_final WHERE year = '2014' AND full_time_position = 'Y'  AND case_status IN ('CERTIFIED','CERTIFIED-WITHDRAWN') GROUP BY year, case_status, job_title, full_time_position ORDER BY avgprewage DESC LIMIT 10;
-
---CREATE TABLE avgprewagefull2015 (year string, case_status string, job_title string, full_time_position string, avgprewage bigint)
---ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
-
---INSERT OVERWRITE TABLE avgprewagefull2015
---SELECT year, case_status, job_title, full_time_position, AVG(prevailing_wage) AS avgprewage FROM h1b_final WHERE year = '2015' AND full_time_position = 'Y'  AND case_status IN ('CERTIFIED','CERTIFIED-WITHDRAWN') GROUP BY year, case_status, job_title, full_time_position ORDER BY avgprewage DESC LIMIT 10;
+INSERT OVERWRITE TABLE avgprewagefull2012
+SELECT year, case_status, job_title, full_time_position, AVG(prevailing_wage) AS avgprewage FROM h1b_final WHERE year = '2012' AND full_time_position = 'Y'  AND case_status IN ('CERTIFIED','CERTIFIED-WITHDRAWN') GROUP BY year, case_status, job_title, full_time_position ORDER BY avgprewage DESC LIMIT 10;
 
 
---CREATE TABLE avgprewagefull2016 (year string, case_status string, job_title string, full_time_position string, avgprewage bigint)
---ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
+CREATE TABLE IF NOT EXISTS avgprewagefull2013 (year string, case_status string, job_title string, full_time_position string, avgprewage bigint)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
 
---INSERT OVERWRITE TABLE avgprewagefull2016
---SELECT year, case_status, job_title, full_time_position, AVG(prevailing_wage) AS avgprewage FROM h1b_final WHERE year = '2016' AND full_time_position = 'Y'  AND case_status IN ('CERTIFIED','CERTIFIED-WITHDRAWN') GROUP BY year, case_status, job_title, full_time_position ORDER BY avgprewage DESC LIMIT 10;
+INSERT OVERWRITE TABLE avgprewagefull2013
+SELECT year, case_status, job_title, full_time_position, AVG(prevailing_wage) AS avgprewage FROM h1b_final WHERE year = '2013' AND full_time_position = 'Y'  AND case_status IN ('CERTIFIED','CERTIFIED-WITHDRAWN') GROUP BY year, case_status, job_title, full_time_position ORDER BY avgprewage DESC LIMIT 10;
+
+
+CREATE TABLE IF NOT EXISTS avgprewagefull2014 (year string, case_status string, job_title string, full_time_position string, avgprewage bigint)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
+
+INSERT OVERWRITE TABLE avgprewagefull2014
+SELECT year, case_status, job_title, full_time_position, AVG(prevailing_wage) AS avgprewage FROM h1b_final WHERE year = '2014' AND full_time_position = 'Y'  AND case_status IN ('CERTIFIED','CERTIFIED-WITHDRAWN') GROUP BY year, case_status, job_title, full_time_position ORDER BY avgprewage DESC LIMIT 10;
+
+CREATE TABLE IF NOT EXISTS avgprewagefull2015 (year string, case_status string, job_title string, full_time_position string, avgprewage bigint)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
+
+INSERT OVERWRITE TABLE avgprewagefull2015
+SELECT year, case_status, job_title, full_time_position, AVG(prevailing_wage) AS avgprewage FROM h1b_final WHERE year = '2015' AND full_time_position = 'Y'  AND case_status IN ('CERTIFIED','CERTIFIED-WITHDRAWN') GROUP BY year, case_status, job_title, full_time_position ORDER BY avgprewage DESC LIMIT 10;
+
+
+CREATE TABLE IF NOT EXISTS avgprewagefull2016 (year string, case_status string, job_title string, full_time_position string, avgprewage bigint)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
+
+INSERT OVERWRITE TABLE avgprewagefull2016
+SELECT year, case_status, job_title, full_time_position, AVG(prevailing_wage) AS avgprewage FROM h1b_final WHERE year = '2016' AND full_time_position = 'Y'  AND case_status IN ('CERTIFIED','CERTIFIED-WITHDRAWN') GROUP BY year, case_status, job_title, full_time_position ORDER BY avgprewage DESC LIMIT 10;
 
 
 
---INSERT OVERWRITE DIRECTORY '/H1BVisaProject/Hive/Q8A_Top10AvgPreWageForEachJobAndYearFullTime' ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' 
+INSERT OVERWRITE DIRECTORY '/H1BVisaProject/Hive/Q8A_Top10AvgPreWageForEachJobAndYearFullTime' ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' 
 SELECT * FROM(
 SELECT year, case_status, job_title, full_time_position, avgprewage  FROM avgprewagefull2011
 UNION
