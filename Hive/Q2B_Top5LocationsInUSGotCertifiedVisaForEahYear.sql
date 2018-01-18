@@ -1,4 +1,6 @@
 
+--Q2 b) find top 5 locations in the US who have got certified visa for each year.[certified]
+
 USE h1b;
 
 --CREATE TABLE certified2011 (year string, worksite string, certifiedcount int)
