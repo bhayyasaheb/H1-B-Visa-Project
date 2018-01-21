@@ -64,7 +64,7 @@ final = FOREACH joined GENERATE FLATTEN($0), (float)($2*100)/$4 AS percentage, $
 --DESCRIBE final;
 --final: {casestatuscount::group::year: chararray,casestatuscount::group::case_status: chararray,percentage: float,caseStatusCount: long}
 
-DUMP final;
+--DUMP final;
 --(2011,DENIED,8.119476,29130)
 --(2011,CERTIFIED,85.83175,307936)
 --(2011,WITHDRAWN,2.8165913,10105)
@@ -91,5 +91,7 @@ DUMP final;
 --(2016,DENIED,1.4163257,9175)
 
 
+filterfinal = FILTER final BY $0 == '$whichyear';
 
+DUMP filterfinal;
 

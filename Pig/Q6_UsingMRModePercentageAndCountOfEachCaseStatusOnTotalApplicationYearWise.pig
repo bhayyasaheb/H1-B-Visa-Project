@@ -105,10 +105,11 @@ percentCountCaseStatusYear = FOREACH joined GENERATE FLATTEN($0), (FLOAT)(caseSt
 --percentCountCaseStatusYear: {caseStatusTotal::group::year: chararray,caseStatusTotal::group::case_status: chararray,percentage: float,caseStatusCount: long}
 
 
-STORE percentCountCaseStatusYear INTO '/H1BVisaProject/Pig/Q6_PercentAndCountOfEachCaseStatusOnTotalApplicationForEachYear' USING PigStorage();
+--STORE percentCountCaseStatusYear INTO '/H1BVisaProject/Pig/Q6_PercentAndCountOfEachCaseStatusOnTotalApplicationForEachYear' USING PigStorage();
 
 
-DUMP percentCountCaseStatusYear;
+
+--DUMP percentCountCaseStatusYear;
 
 --(2011,DENIED,8.119476,29130)
 --(2011,CERTIFIED,85.83175,307936)
@@ -134,5 +135,6 @@ DUMP percentCountCaseStatusYear;
 --(2016,WITHDRAWN,3.3791137,21890)
 --(2016,CERTIFIED-WITHDRAWN,7.269494,47092)
 --(2016,DENIED,1.4163257,9175)
+
 
 
